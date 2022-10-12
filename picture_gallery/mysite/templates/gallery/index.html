@@ -1,0 +1,22 @@
+<!--kuvien näyttö-->
+{% extends 'base.html' %}
+{% block content %}
+    <div class="col-md-12">
+        <h1>Gallery show {{ user.username }} pictures</h1>
+
+       <label for="fname">Search picture</picture>:</label><br>
+       <input type="text" id="fname" name="fname"><br>
+        <input type="submit" value="submit">
+        <p><a href="{% url 'gallery:image_upload' %}">Upload more images</a></p>
+    </div>
+    
+    {% for post in posts %}
+    <div class="col-md-4">
+        {% if post.omistaja == user.username %}
+            <p>{{ post.description }}</p>
+            <img src="{{ post.image.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+        {% endif %}
+    </div>
+
+    {% endfor %}
+{% endblock %}
